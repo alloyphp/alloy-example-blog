@@ -30,6 +30,21 @@ class Controller extends App\Module\ControllerAbstract
     }
 
 
+    /**
+     * Create new blog post form
+     * @method GET
+     */
+    public function newAction(Alloy\Request $request)
+    {
+        $kernel = \Kernel();
+        $post = $kernel->mapper()->get('Module\Blog\Post');
+        return \Kernel()->spotForm($post);
+    }
+
+
+    /**
+     * Auto-install for module entity database tables, etc.
+     */
     public function install()
     {
         return \Kernel()->mapper()->migrate('Module\Blog\Post');
