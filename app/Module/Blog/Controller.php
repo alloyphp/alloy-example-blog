@@ -19,7 +19,7 @@ class Controller extends App\Module\ControllerAbstract
         $kernel = \Kernel();
     	$mapper = $kernel->mapper();
 
-        $posts = $mapper->all('\Module\Blog\Post')
+        $posts = $mapper->all('Module\Blog\Post')
             ->order(array('date_published' => 'DESC'));
 
     	// Returns Alloy\View\Template object that renders template on __toString:

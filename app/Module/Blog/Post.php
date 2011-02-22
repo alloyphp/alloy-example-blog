@@ -1,11 +1,11 @@
 <?php
 namespace Module\Blog;
-use App, Alloy;
+use Alloy, Spot;
 
-class Post extends Spot\EntityAbstract
+class Post extends Spot\Entity
 {
 	protected static $_datasource = 'blog_posts';
-	
+
 	public static function fields()
 	{
 		return array(

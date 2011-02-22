@@ -4,5 +4,20 @@
 $view->title('Hello from Alloy Framework!');
 ?>
 
-<p><?php echo $greeting; ?>!</p>
-<p><code>Find me in: <?php echo __FILE__; ?></code></p>
+<h2>Blog Posts</h2>
+<?php
+$table = $this->generic('datagrid')
+	->data($posts)
+	->column('Title', function($item) {
+		return $item->title;
+	})
+	->column('Published', function($item) use($view) {
+		return $view->toDate($item->date_publushed);
+	})
+	->column('Edit', function($item) use($view) {
+		return $view->link();
+	});
+
+// Renders full table for all items given on __toString
+echo $table;
+?>

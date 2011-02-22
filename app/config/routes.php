@@ -19,4 +19,4 @@ $router->route('module', '/<:module>(.<:format>)') // :format optional
     ->defaults(array('action' => 'index', 'format' => 'html'));
 
 $router->route('default', '/')
-    ->defaults(array('module' => 'Home', 'action' => 'index', 'format' => 'html'));
+    ->defaults(array('module' => 'Blog', 'action' => 'index', 'format' => 'html'));
