@@ -1,10 +1,10 @@
 <?php
 $form = $view->helper('Form');
-$formMethod = strtoupper(($method == 'GET' || $method == 'POST') ? $method : 'post');
-$formMethodRest = ($formMethod == 'POST' && $method != 'POST') ? $method : false;
+$formMethod = strtoupper(($view->method == 'GET' || $view->method == 'POST') ? $view->method : 'post');
+$formMethodRest = ($formMethod == 'POST' && $view->method != 'POST') ? $view->method : false;
 ?>
 
-<form action="<?php echo $action; ?>" method="post">
+<form action="<?php echo $view->action; ?>" method="post">
   <ol class="app_form">
   <?php if($fields && count($fields) >0): ?>
   <?php

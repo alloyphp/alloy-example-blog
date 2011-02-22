@@ -1,6 +1,6 @@
 <?php
 namespace Plugin\Spot;
-use Alloy;
+use Spot, Alloy;
 
 /**
  * Spot ORM Plugin
@@ -26,6 +26,7 @@ class Plugin
         // Make methods globally avaialble with Kernel
         $kernel->addMethod('mapper', array($this, 'mapper'));
         $kernel->addMethod('spotConfig', array($this, 'spotConfig'));
+        $kernel->addMethod('spotForm', array($this, 'spotForm'));
 
         // Debug Spot queries
         $kernel->events()->bind('response_sent', 'spot_query_log', array($this, 'debugQueryLog'));
@@ -75,6 +76,23 @@ class Plugin
         }
         return $this->spotConfig;
     }
+
+
+    /**
+     * Return view object for the add/edit form
+     *
+     * @param \Spot\Entity $entity Entity object to build form from and set data with
+     */
+    public function spotForm(Spot\Entity $entity)
+    {
+        $entityClass = get_class($entity);
+        $view = new \Alloy\View\Generic\Form('form');
+        $view->action("")
+            ->fields($entityClass::fields()) // love me some late static binding
+            ->removeFields(array('id', 'date_created', 'date_modified'));
+        return $view;
+    }
+
 
     /**
      * Debug Spot queries by dumping query log
