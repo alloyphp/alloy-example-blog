@@ -1,7 +1,7 @@
 <?php
 // Sets page title
 // @see app/layouts/app.html.php
-$view->title('Hello from Alloy Framework!');
+$view->head()->title('Blog Posts from Alloy!');
 ?>
 
 <h2>Blog Posts</h2>
@@ -19,5 +19,5 @@ $table = $this->generic('datagrid')
 	});
 
 // Renders full table for all items given on __toString
-echo $table;
+echo $table->content();
 ?>

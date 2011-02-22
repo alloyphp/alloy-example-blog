@@ -20,11 +20,18 @@ class Controller extends App\Module\ControllerAbstract
     	$mapper = $kernel->mapper();
 
         $posts = $mapper->all('Module\Blog\Post')
-            ->order(array('date_published' => 'DESC'));
+            ->order(array('date_published' => 'DESC'))
+            ->execute();
 
     	// Returns Alloy\View\Template object that renders template on __toString:
     	//   views/indexAction.html.php
         return $this->template(__FUNCTION__)
         	->set(compact('posts'));
+    }
+
+
+    public function install()
+    {
+        return \Kernel()->mapper()->migrate('Module\Blog\Post');
     }
 }
