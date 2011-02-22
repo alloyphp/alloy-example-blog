@@ -129,11 +129,11 @@ try {
 $content = $kernel->events()->filter('dispatch_content', $content);
 
 // Exception detail depending on mode
-if($content instanceof Exception) {
+if($content instanceof \Exception) {
     $e = $content;
     $content = "<h1>ERROR</h1><p>" . get_class($e) . " (Code: " . $e->getCode() . ")<br />" . $e->getMessage() . "</p>";
     // Show debugging info?
-    if($kernel->config('debug')) {
+    if($kernel && $kernel->config('debug')) {
         $content .= "<p>File: " . $e->getFile() . " (" . $e->getLine() . ")</p>";
         $content .= "<pre>" . $e->getTraceAsString() . "</pre>";
     }
@@ -145,6 +145,12 @@ if($kernel) {
     if($responseStatus != 200) {
         $response->status($responseStatus);
     }
+
+    // Pass along set response status and data if we can
+    if($content instanceof Alloy\Module\Response) {
+        $response->status($content->status());
+    }
+    
     $response->content($content);
     $response->send();
     

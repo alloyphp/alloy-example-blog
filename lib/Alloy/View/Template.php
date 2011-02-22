@@ -1,6 +1,6 @@
 <?php
 namespace Alloy\View;
-use Alloy\Module\ResponseAbstract;
+use Alloy\Module;
 
 /**
  * View template class that will display and handle view templates
@@ -9,7 +9,7 @@ use Alloy\Module\ResponseAbstract;
  * @link http://alloyframework.com/
  * @license http://www.opensource.org/licenses/bsd-license.php
  */
-class Template extends ResponseAbstract
+class Template extends Module\Response
 {
     // Template specific stuff
     protected $_file;

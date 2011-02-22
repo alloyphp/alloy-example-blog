@@ -1,6 +1,6 @@
 <?php
 namespace Alloy;
-use Alloy\Module\ResponseAbstract;
+use Alloy\Module;
 
 /**
  * Resource wrapper object
@@ -8,7 +8,7 @@ use Alloy\Module\ResponseAbstract;
  * @package Alloy Framework
  * @link http://alloyframework.com/
  */
-class Resource extends ResponseAbstract
+class Resource extends Module\Response
 {
     protected $_resource;
     protected $_errors = array();
@@ -105,13 +105,14 @@ class Resource extends ResponseAbstract
 
         return $r;
     }
+
     
     /**
      * Return string content of resource
      *
      * @return string
      */
-    public function __toString()
+    public function content()
     {
         // Return unchanged if string
         if(is_string($this->_resource)) {
