@@ -1,9 +1,9 @@
 <?php
-namespace Module\Home;
+namespace Module\Blog;
 use App, Alloy;
 
 /**
- * Home Module
+ * Blog Module
  * 
  * Extends from base Application controller so custom functionality can be added easily
  *   lib/App/Module/ControllerAbstract
@@ -16,21 +16,15 @@ class Controller extends App\Module\ControllerAbstract
      */
     public function indexAction(Alloy\Request $request)
     {
-    	$greeting = "Hello World";
+        $kernel = \Kernel();
+    	$mapper = $kernel->mapper();
+
+        $posts = $mapper->all('\Module\Blog\Post')
+            ->order(array('date_published' => 'DESC'));
 
     	// Returns Alloy\View\Template object that renders template on __toString:
     	//   views/indexAction.html.php
         return $this->template(__FUNCTION__)
-        	->set(compact('greeting'));
-    }
-
-
-    /**
-     * Return raw string content
-     * @method GET
-     */
-    public function helloAction(Alloy\Request $request)
-    {
-        return "Hello World!";
+        	->set(compact('posts'));
     }
 }
