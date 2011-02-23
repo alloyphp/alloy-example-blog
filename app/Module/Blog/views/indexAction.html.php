@@ -12,7 +12,7 @@ $view->head()->title('Blog Posts from Alloy!');
 
 <?php
 // Datagrid to display Blog posts
-$table = $this->generic('datagrid')
+$table = $view->generic('datagrid')
     ->data($posts)
     ->column('Title', function($item) {
         return $item->title;
@@ -21,10 +21,18 @@ $table = $this->generic('datagrid')
         return $view->toDate($item->date_publushed);
     })
     ->column('Edit', function($item) use($view) {
-        return $view->link('Edit', array(
+        return $view->link('edit', array(
             'module' => 'Blog',
-            'action' => 'edit'
-            ));
+            'action' => 'edit',
+            'item' => $item->id
+            ), 'module_item_action');
+    })
+    ->column('Delete', function($item) use($view) {
+        return $view->link('delete', array(
+            'module' => 'Blog',
+            'action' => 'delete',
+            'item' => $item->id
+            ), 'module_item_action');
     })
     ->noData(function() {
         return "<p>No blog posts found.</p>";

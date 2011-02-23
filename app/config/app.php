@@ -31,7 +31,7 @@ $cfg['url']['assets'] = $cfg['url']['root'] . str_replace($cfg['dir']['www'], ''
 $cfg['url']['rewrite'] = true;
 
 // Debug?
-$cfg['debug'] = false;
+$cfg['debug'] = true;
 
 // In Development Mode?
 $cfg['mode']['development'] = true;
@@ -69,7 +69,9 @@ $cfg['session']['lifetime'] = 28000;
 $cfg['i18n'] = array(
     'charset' => 'UTF-8',
     'language' => 'en_US',
-    'timezone' => 'America/Chicago'
+    'timezone' => 'America/Chicago',
+    'date_format' => 'M d, Y',
+    'datetime_format' => 'M d, Y H:i:s'
 );
 
 return $cfg;

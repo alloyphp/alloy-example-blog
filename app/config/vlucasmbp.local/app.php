@@ -3,7 +3,7 @@
 $cfg = array();
 
 // Debug?
-$cfg['debug'] = true;
+$cfg['debug'] = false;
 
 // In Development Mode?
 $cfg['mode']['development'] = true;
