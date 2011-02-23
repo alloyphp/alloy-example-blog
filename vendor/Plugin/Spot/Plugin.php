@@ -87,8 +87,10 @@ class Plugin
     {
         $entityClass = get_class($entity);
         $view = new \Alloy\View\Generic\Form('form');
-        $view->action("")
+        $view->action('')
+            ->method('post')
             ->fields($entityClass::fields()) // love me some late static binding
+            ->data($entity->data())
             ->removeFields(array('id', 'date_created', 'date_modified'));
         return $view;
     }

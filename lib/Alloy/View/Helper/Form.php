@@ -30,6 +30,7 @@ class Form extends HelperAbstract
         );
         $type = (isset($inputTypeMap[$type]) ? $inputTypeMap[$type] : $type);
         $extra['id'] = isset($extra['id']) ? $extra['id'] : trim($name);
+
         $tag = '<input type="' . $type . '" name="' . $name . '" value="' . $value . '"' . $this->listExtra($extra) . ' />';
         return $tag;
     }
