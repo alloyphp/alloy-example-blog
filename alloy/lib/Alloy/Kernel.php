@@ -557,7 +557,7 @@ class Kernel
         
         // Use query string if URL rewriting is not enabled
         if($this->config('url.rewrite')) {
-            $url = $urlBase . $url . (($queryString !== false) ? '?' . $queryString : '');
+            $url = rtrim($urlBase, '/') . '/' . $url . (($queryString !== false) ? '?' . $queryString : '');
         } else {
             $url = $urlBase . '?u=' . $url . (($queryString !== false) ? '&amp;' . $queryString : '');
         }
