@@ -30,14 +30,11 @@ $requestUrl = '/' . (isset($_GET['u']) ? $_GET['u'] : '');
 $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $urlBase = $requestPath;
 
-//var_dump($requestUrl, $requestPath);
-
 // Replace last occurance of request URL in full path if found
 $pathPos = strpos($requestPath, $requestUrl);
 if(false !== $pathPos) {
     $urlBase = substr_replace($urlBase, '', $pathPos, strlen($requestUrl));
 }
- //str_replace($requestUrl, '', $requestPath);
 
 // URL info
 $isHttps = (!isset($_SERVER['HTTPS']) || strtolower($_SERVER['HTTPS']) != 'on') ? false : true;
