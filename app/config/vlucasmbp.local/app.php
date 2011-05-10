@@ -1,21 +1,21 @@
 <?php
 // Configuration
-$cfg = array();
+$cfg = require dirname(__DIR__) . '/app.php';
 
 // Debug?
-$cfg['debug'] = false;
+$cfg['app']['debug'] = false;
 
 // In Development Mode?
-$cfg['mode']['development'] = true;
+$cfg['app']['mode']['development'] = true;
 
 // Layout to wrap around response (if Alloy_Layout plugin enabled)
-$cfg['layout'] = array(
+$cfg['app']['layout'] = array(
     'enabled' => true,
     'template' => 'app'
 );
 
 // Database (Optional - only used if module loads a mapper)
-$cfg['database']['master'] = array(
+$cfg['app']['database']['master'] = array(
     'adapter' => 'mysql',
     'host' => 'localhost',
     'username' => 'root',

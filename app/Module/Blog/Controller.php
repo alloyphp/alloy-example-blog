@@ -17,17 +17,20 @@ class Controller extends App\Module\ControllerAbstract
     public function indexAction(Alloy\Request $request)
     {
         $kernel = \Kernel();
-    	$mapper = $kernel->mapper();
+        $mapper = $kernel->mapper();
 
         $posts = $mapper->all('Module\Blog\Post')
-            ->order(array('date_published' => 'DESC'))
-            ->execute();
-        $another = 'blah';
+            ->order(array('date_published' => 'DESC'));
 
-    	// Returns Alloy\View\Template object that renders template on __toString:
-    	//   views/indexAction.html.php
-        return $this->template(__FUNCTION__)
-        	->set(compact('posts', 'another'));
+        if('html' == $request->format) {
+            // Returns Alloy\View\Template object that renders template on __toString:
+            //   views/indexAction.html.php
+            return $this->template(__FUNCTION__)
+               ->set(compact('posts'));
+        } else {
+            // API response
+            return $kernel->resource($posts);
+        }
     }
 
 
@@ -45,8 +48,12 @@ class Controller extends App\Module\ControllerAbstract
             return false;
         }
 
-        return $this->template(__FUNCTION__)
-            ->set(compact('post'));
+        if('html' == $request->format) {
+            return $this->template(__FUNCTION__)
+                ->set(compact('post'));   
+        } else {
+            return $kernel->resource($post);
+        }
     }
 
 
@@ -91,7 +98,7 @@ class Controller extends App\Module\ControllerAbstract
                 $res = $kernel->spotForm($item);
             // Others (XML, JSON)
             } else {
-                $res = $kernel->resource();
+                $res = $kernel->resource(array());
             }
 
             // Set HTTP status and errors
@@ -153,6 +160,7 @@ class Controller extends App\Module\ControllerAbstract
         }
 
         $item->data($request->post());
+        $item->date_modified = new \DateTime();
 
         // Common save functionality
         return $this->saveItem($item);
